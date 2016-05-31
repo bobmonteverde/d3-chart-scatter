@@ -61,20 +61,16 @@
     var chart = d3_chart_scatter.chart_scatter()
       .width(500)
       .height(300)
-      //.renderAxisLeft(false)
+      .margin({left: 20, right: 50})
       //.renderAxisRight(true)
-      //.renderAxisBottom(false)
-      //.renderAxisTop(true)
-      //.margin({right: 40, left: 10, top: 30, bottom: 10})
-      //.scaleBottom(bottomScale)
-      //.scaleLeft(leftScale)
-      //.scaleTop(bottomScale)
-      //.scaleRight(leftScale)
+      //.renderAxisLeft(false)
       .labelBottom('X Axis')
-      //.labelLeft('Y Axis')
-      //.labelPosBottom(['outside', 'center'])
-      //.labelPosLeft(['outside', 'middle'])
-      //.tickSizeBottom([3])
+
+    var chartDispatch = chart.dispatch()
+
+    chartDispatch.on('elementClick', function(d) {
+      console.log('Click', d)
+    })
 
     d3_selection.select('#chart_scatter_example')
         .datum(data)

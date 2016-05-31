@@ -40,7 +40,11 @@ For example, on linux/mac you can run `python -m SimpleHTTPServer 8888` and open
 
 <a name="chart_scatter" href="#chart_scatter">#</a> d3_chart_scatter.<b>chart_scatter</b>()
 
-Constructs a new chart function and returns it.
+Constructs a new scatter chart function and returns it.
+
+<a name="scatter" href="#scatter">#</a> d3_chart_scatter.<b>scatter</b>()
+
+Constructs a new scatter chart (bare scatter, no axes) function and returns it.
 
 <a name="chart" href="#chart">#</a> chart(<i>context</i>)
 

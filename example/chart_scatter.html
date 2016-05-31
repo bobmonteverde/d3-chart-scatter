@@ -2,6 +2,78 @@
   <body>
 
     <style>
+
+    body {
+    }
+
+    #example {
+      position: relative;
+      left: 30px;
+      top: 30px;
+    }
+
+    .d3-tooltip {
+      position: absolute;
+      z-index: 10000;
+      display: block;
+      background-color: rgba(0,0,0,.8);
+      color: #fff;
+      min-width: 100px;
+      max-width: 400px;
+      opacity: 0;
+      border-radius: 0;
+      height: auto;
+      padding: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      font-size: 14px;
+
+      pointer-events: none;
+      -webkit-touch-callout: none;
+      user-select: none;
+    }
+
+    .d3-tooltip.d3-tooltip-gravity-n:before {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      margin-left: -10px;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid rgba(0,0,0,.8);
+    }
+
+    .d3-tooltip.d3-tooltip-gravity-s:after {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -10px;
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid rgba(0,0,0,.8);
+    }
+
+    .d3-tooltip .d3-tooltip-key {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .d3-tooltip .d3-tooltip-x {
+      display: inline-block;
+      padding: 5px;
+      font-weight: bold;
+    }
+    .d3-tooltip .d3-tooltip-y {
+      display: inline-block;
+      padding: 5px;
+      font-weight: bold;
+    }
     .d3-chart-label {
       fill: #000;
     }
@@ -19,9 +91,12 @@
       stroke: black !important;
       stroke-width: 3px;
     }
+
     </style>
 
-    <svg id="chart_scatter_example" style="width:500px;height:300px"></svg>
+    <div id="example">
+      <svg id="chart_scatter_example" style="width:500px;height:300px"></svg>
+    </div>
 
     <script src="https://d3js.org/d3-array.v0.7.min.js"></script>
     <script src="https://d3js.org/d3-collection.v0.1.min.js"></script>
@@ -38,6 +113,7 @@
     <script src="https://d3js.org/d3-transition.v0.2.min.js"></script>
     <script src="https://d3js.org/d3-axis.v0.3.min.js"></script>
 
+    <script src="../node_modules/d3-simple-tooltip/build/d3-simple-tooltip.js"></script>
     <script src="../node_modules/d3-chart-xybase/build/d3-chart-xybase.js"></script>
 
     <script src="../build/d3-chart-scatter.js"></script>

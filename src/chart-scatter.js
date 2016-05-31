@@ -3,6 +3,7 @@ import d3_chart_xybase from 'd3-chart-xybase'
 import d3_dispatch from 'd3-dispatch'
 import d3_scale from 'd3-scale'
 import d3_selection from 'd3-selection'
+import d3_simple_tooltip from 'd3-simple-tooltip'
 import rebind from './rebind'
 import functor from './functor'
 import scatter from './scatter'
@@ -15,6 +16,8 @@ export default function chart_scatter () {
 
   var chartBase      = d3_chart_xybase.chart_xybase(),
       scatterChart   = scatter(),
+      useTooltip     = true,
+      tooltipContent = (d, i) => `<div class="d3-tooltip-x">${scatterChart.x()(d, i)}</div><div class="d3-tooltip=y">${scatterChart.y()(d, i)}</div>`,
       height         = 400,
       width          = 600,
       margin         = { top: 20, right: 20, bottom: 30, left: 40 }
@@ -39,6 +42,9 @@ export default function chart_scatter () {
       scatterChart
         .width(availableWidth)
         .height(availableHeight)
+
+      scatterChart.dispatch().on('elementMouseover.tooltip', showTooltip)
+      scatterChart.dispatch().on('elementMouseout.tooltip', hideTooltip)
 
       chartBase
         .margin(margin)
@@ -66,6 +72,27 @@ export default function chart_scatter () {
       container.select('.d3-chart-base')
           .call(chartBase)
 
+
+      function showTooltip(d, i) {
+        if (!useTooltip) return;
+
+        let left = scatterChart.scaleX()(scatterChart.x().apply(this, arguments)) + margin.left
+        let top =  scatterChart.scaleY()(scatterChart.y().apply(this, arguments)) + margin.top
+
+        d3_simple_tooltip.tooltip.show({
+          pos: [left, top],
+          content: tooltipContent.apply(this, arguments),
+          gravity: 's',
+          dist: 20,
+          parent: container.node().parentNode
+        })
+      }
+
+      function hideTooltip() {
+        if (!useTooltip) return;
+        d3_simple_tooltip.tooltip.cleanup();
+      }
+
     })
   }
 
@@ -79,6 +106,12 @@ export default function chart_scatter () {
   chart.chartBase = function(_) {
     if (!arguments.length) return chartBase
     chartBase = _
+    return chart
+  }
+
+  chart.useTooltip = function(_) {
+    if (!arguments.length) return useTooltip
+    useTooltip = _
     return chart
   }
 

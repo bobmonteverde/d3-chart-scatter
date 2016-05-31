@@ -1,0 +1,37 @@
+{
+  "name": "d3-chart-scatter",
+  "version": "0.0.1",
+  "description": "SVG scatter chart model.",
+  "keywords": [
+    "d3"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "build/d3-chart-scatter.js",
+  "jsnext:main": "index",
+  "homepage": "https://github.com/bobmonteverde/d3-chart-scatter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobmonteverde/d3-chart-scatter.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && json2module package.json > build/package.js && rollup -c",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/d3-chart-scatter.js -c -m -o build/d3-chart-scatter.min.js",
+    "postpublish": "zip -j build/d3-chart-scatter.zip -- LICENSE README.md build/d3-chart-scatter.js build/d3-chart-scatter.min.js"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "json2module": "0.0",
+    "rollup": "0.25",
+    "rollup-plugin-babel": "^2.4.0",
+    "tape": "4",
+    "uglify-js": "2"
+  },
+  "dependencies": {
+    "d3-array": "0.7.x",
+    "d3-chart-xybase": "0.0.1",
+    "d3-dispatch": "0.4.x",
+    "d3-scale": "0.7.x",
+    "d3-selection": "0.7.x"
+  }
+}
